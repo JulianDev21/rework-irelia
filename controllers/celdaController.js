@@ -101,8 +101,9 @@ export async function putCelda(req,res){
         // Concatenar numbercell y plateVehicle para crear el PIN
         const concatenatedString = `${numbercell}${plateVehicle}`;
         const hashedPin = bcrypt.hashSync(concatenatedString, 10); // Se recomienda usar un salt de 10
+        const newStatus = 'no disponible'
 
-        await Celda.findOneAndUpdate({_id:id},{plateVehicle:plateVehicle, entryDate, departureDate:departureDate, pin:hashedPin})
+        await Celda.findOneAndUpdate({_id:id},{status: newStatus, plateVehicle:plateVehicle, entryDate, departureDate:departureDate, pin:hashedPin})
     }catch (error){
         msg=error
     }
